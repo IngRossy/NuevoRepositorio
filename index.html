@@ -1,12 +1,120 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
+<!DOCTYPE HTML PUBLIC> 
+<html>
+ <head>
+ <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+    <title>CALCULAR IMC</title>
+    
+    <!-- Bootstrap CSS v5.2.0-beta1--> 
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css"  integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    
+    
+    <link rel="stylesheet" href="css/estilos.css">
+
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+    <script type="text/javascript">
+       function calculaIMC()
+       {
+            var peso;
+            var estatura;
+            var resultado; 
+            var categoria;
+            
+            peso=document.getElementById("peso").value;
+            estatura=document.getElementById("estatura").value/100;
+           
+            resultado=peso/(estatura*estatura);
+           
+            document.getElementById("resultado").value=resultado.toFixed(2);
+            
+            if(resultado<18.5)
+              {
+                  categoria="Bajo peso, Deberia subir " + (estatura*estatura*24.9-peso).toFixed(1) + " kilos";
+              }
+            else if(resultado>=18.5 && resultado<=24.9) 
+              {
+                  categoria="Tiene un peso saludable"
+              }
+            else if(resultado>24.9 && resultado<=29.9) 
+              {
+                  categoria="Sobrepeso. Deberia adelgazar "+(peso-estatura*estatura*24.9).toFixed(1) +" kilos";
+              }
+            else if(resultado>29.9 && resultado<=34.9) 
+              {
+                  categoria="Obesidad grado 1. Deberia adelgazar "+(peso-estatura*estatura*24.9).toFixed(1) +" kilos";
+              }
+            else if(resultado>34.9 && resultado<=39.9) 
+              {
+                  categoria="Obesidad grado 2. Deberia adelgazar "+(peso-estatura*estatura*24.9).toFixed(1) +" kilos";
+              }
+            else if(resultado>39.9) 
+              {
+                  categoria="Obesidad grado 3. Deberia adelgazar "+(peso-estatura*estatura*24.9).toFixed(1) +" kilos";
+              }
+                  document.getElementById("categoria").value=categoria;
+       }
+       
+    </script>
+ </head>
+
+
 <body>
-    hola
-</body>
-</html>
+    <center>
+        <img src="img/IMC.png" width="400" height="180"  alt="" class="encabezado">
+    </center>
+  <br>
+
+<div class="container"   >  
+  <form  name="formulario" id="formulario" class="z-depth-3" action="" >
+  <fieldset >
+  <legend class="indigo-text darken-4  " >CALCULAR EL INDICE DE MASA CORPORAL</legend>
+ 
+   <p >Nombres:
+     <input type="text" class=" white" name="nombres" id="nombres" size="30" required="required">
+   </p>
+  
+    <p>Ingrese su estatura (cm):
+      <input type="text" class="white" name="estatura" id="estatura" size="5" maxlength="3">
+    </p>
+  
+   <p>Ingrese su peso (kg):
+   <input type="text" class="white" name="peso" id="peso" size="5" maxlength="5">
+  
+  </p>
+   <p> IMC:
+    <input type="text" class="grey lighten-2" name="resultado" id="resultado" size="10" maxlength="15" readonly>
+  <p>Tome en cuenta para su salud:
+    <input type="text" class="grey lighten-2"  name="categoria" id="categoria" size="30" readonly>
+      
+    </div>
+   </p>
+ </fieldset>
+ </form>
+
+  <div class="container">
+    <center>
+      <button class="btn red rounded-4 " type="button" value="Calcular IMC" id="calcular" onClick="calculaIMC()" ><span>Calcular</span></button>
+      <button class="btn grey darken-2 rounded-4 " type="button" value="Guardar" id="guardar" onclick=" guardar() " ><span>Guardar</span></button>
+      <button class="btn green darken-3 rounded-4 " type="button" value="Consultar" id="consultar" onclick="consultar()" ><span>Consultar</span></button>
+      <button class="btn black rounded-4 " type="button" value="Limpiar" id="limpiar" onclick="limpiar()" ><span>LIMPIAR</span></button> 
+  </center> 
+  
+</div>
+ 
+
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+<script src="js/configuracion.js"></script> 
+<script src="js/funciones.js"></script>
+
+ <!-- Boostrap -->
+ <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js" integrity="sha384-Xe+8cL9oJa6tN/veChSP7q+mnSPaj5Bcu9mPX5F5xIGE0DVittaqT5lorf0EI7Vk" crossorigin="anonymous"></script>
+ <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.min.js" integrity="sha384-kjU+l4N0Yf4ZOJErLsIcvOU2qSb74wXpOhqTvwVx3OElZRweTnQ6d31fXEoRD1Jy" crossorigin="anonymous"></script>
+  
+<!-- Compiled and minified JavaScript -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+            
+ </body>
+ </html>
